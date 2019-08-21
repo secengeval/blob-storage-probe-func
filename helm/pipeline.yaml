@@ -1,0 +1,31 @@
+project: "secengeval/blob-storage-probe-func"
+
+repository: "secengeval/blob-storage-probe-func"
+
+cloneURL: "https://github.com:secengeval/blob-storage-probe-func.git"
+
+sharedSecret: "s3c0psr0cks"
+
+vcsSidecar: globaldevopsreg11.azurecr.io/vcssidecar:v1.11
+
+buildStorageSize: "300Mi"
+
+allowPrivilegedJobs: "true"
+
+allowHostMounts: "true"
+
+kubernetes:
+  # Allow or disallow usage of secretKeyRef in job environments.
+  allowSecretKeyRef: "true"
+  # OPTIONAL: Override the storage class used for storing job caches. This must
+  # point to a readWriteMany volume provisioner.
+  cacheStorageClass: azurefile
+  # OPTIONAL: Override the storage class used for build storage. This must
+  # point to a readWriteMany volume provisioner.
+  buildStorageClass: azurefile
+
+worker:
+ registry: globaldevopsreg11.azurecr.io
+ name: devops-brigade-worker
+ tag: 0.0.225
+ pullPolicy: IfNotPresent
